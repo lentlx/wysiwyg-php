@@ -1,11 +1,12 @@
 <?php
 
 //Affectation des variables
-$file = strip_tag($_POST['file']);
-$titre = htmlentities($_POST['titre']);
+$file = $_POST['file'];
+$titre = $_POST['titre'];
+$description = $_POST['description'];
 $bgcolor = $_POST['bg-color'];
 $headerColor = $_POST['header-color'];
-$h1 = htmlentities($_POST['h1']);
+$h1 = $_POST['h1'];
 $mytextarea = $_POST['mytextarea'];
 $fontcolor = $_POST['fontcolor'];
 define("ENCODAGE","utf-8");
@@ -22,9 +23,7 @@ if(!isset($_POST['h1']) or $_POST['h1'] == "")
 }
 
 //SUPPRESION DES ESPACES DANS NOM DU FICHIER
-while(strpos($file," ") != false){
-    $file = str_replace(" ","",$file);
-}
+$cleanFile = preg_replace('/[^A-Za-z0-9]/', '', $file);
 
 //CONTENU DE LA PAGE
 $contenu = '
@@ -32,12 +31,13 @@ $contenu = '
 <html>
     <head>
     <meta charset="'.ENCODAGE.'" />
-        <title>'.$titre.'</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+    <meta name="description" content="'.$description.'" />
+    <title>'.$titre.'</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body style="background-color:'.$bgcolor.'; color:'.$fontcolor.';">
         <header style="background-color:'.$headerColor.';">
-                    <h1>'.$h1.'</h1>
+            <h1>'.$h1.'</h1>
         </header>
         <main>
             <div style="padding: 0% 10%">
@@ -52,7 +52,7 @@ $contenu = '
 // fopen permet d'ouvrir un fichier sur le gestionnaire de fichiers ou le serveur. 
 //Cela permet d'apporter des modifications dans un fichier grâce au php.
 // Si le fichier n'existe pas,la fonction le crée.
-$fichier = fopen("generated-pages/".$file.".html", "w");
+$fichier = fopen("generated-pages/".$cleanFile.".html", "w");
 
 //Cette ligne permet d'encoder le contenu en utf-8, pour les logiciels comme Excel qui n'utilisent pas cet encodage.
 $contenu = utf8_decode($contenu);
@@ -82,7 +82,7 @@ echo'
                     <p>Votre page a bien été crée.</p>
                 </div>
                 <div>
-                    <a href="generated-pages/'.$file.'.html">Cliquez ici pour visualiser la page</a>
+                    <a href="generated-pages/'.$cleanFile.'.html">Cliquez ici pour visualiser la page</a>
                 </div>
             <div>
         </main>
