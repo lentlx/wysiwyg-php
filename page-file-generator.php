@@ -1,5 +1,7 @@
 <?php
 
+include "variables.php";
+
 //Affectation des variables
 $file = $_POST['file'];
 $titre = $_POST['titre'];
@@ -9,7 +11,6 @@ $headerColor = $_POST['header-color'];
 $h1 = $_POST['h1'];
 $mytextarea = $_POST['mytextarea'];
 $fontcolor = $_POST['fontcolor'];
-define("ENCODAGE","utf-8");
 
 //Si l'utilisateur ne rempli pas le formulaire :
 if(!isset($_POST['titre']) or $_POST['titre'] =="")
@@ -22,7 +23,7 @@ if(!isset($_POST['h1']) or $_POST['h1'] == "")
     $h1 = "Vous n'avez pas saisi de titre";
 }
 
-//SUPPRESION DES ESPACES DANS NOM DU FICHIER
+//SUPPRESION DES ESPACES ET CARACTÈRES SPÉCIAUX DANS NOM DU FICHIER
 $cleanFile = preg_replace('/[^A-Za-z0-9]/', '', $file);
 
 //CONTENU DE LA PAGE
@@ -33,7 +34,7 @@ $contenu = '
     <meta charset="'.ENCODAGE.'" />
     <meta name="description" content="'.$description.'" />
     <title>'.$titre.'</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
     </head>
     <body style="background-color:'.$bgcolor.'; color:'.$fontcolor.';">
         <header style="background-color:'.$headerColor.';">
@@ -70,7 +71,7 @@ echo'
     <head>
     <meta charset="'.ENCODAGE.'" />
         <title>Confirmation génération de la page</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
     </head>
     <body>
         <header>

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/htg5uml.css">
 
     <!--CSS import-->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 
 <body>
@@ -38,7 +38,7 @@
             <div class="admin-card">
                 <h2>Création & Gestion</h2>
                 <ul>
-                    <li><a href="page-form-generator.php">Générateur de page web</a></li>
+                    <li><a href="page-form-generator.html">Générateur de page web</a></li>
                 </ul>
             </div>
         </div>
