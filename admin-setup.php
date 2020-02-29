@@ -23,7 +23,7 @@
     </header>
     <main>
         <div class="flex-center">
-            <div id="admin-setup">
+            <div class="flex-column">
                 <form method="POST" action="confirm_inscirption.html">
                     <div>
                         <label for="newsletter">Civilité<span class="required_el">*</span></label>
