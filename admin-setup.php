@@ -24,7 +24,7 @@
     <main>
         <div class="flex-center">
             <div class="flex-column">
-                <form method="POST" action="confirm_inscirption.html">
+                <form method="POST" action="confirm_inscription.php" enctype="multipart/form-data">
                     <div>
                         <label for="newsletter">Civilité<span class="required_el">*</span></label>
                         <span>
