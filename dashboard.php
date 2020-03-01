@@ -31,7 +31,7 @@
             <div class="admin-card">
                 <h2>Espace administrateur</h2>
                 <ul>
-                    <li><a href="admin-setup.php">Créer un nouveau compte administrateur</a></li>
+                    <li><a href="admin-setup.html">Créer un nouveau compte administrateur</a></li>
                     <li>Gérer les comptes administrateurs existants</li>
                 </ul>
             </div>
