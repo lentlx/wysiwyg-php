@@ -1,3 +1,8 @@
+<?php
+
+
+
+echo'
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +25,11 @@
 <body>
     <header>
         <h1>Dashboard</h1>
-        <p>Bonjour, nom_utilisateur. Bienvenue sur votre espace d'administration.</p>
+        <p>Bonjour, nom_utilisateur. Bienvenue sur votre espace d\'administration.</p>
     </header>
     <main id="dashboard">
         <p>
-            Ici, vous pouvez gérer les comptes administrateurs et créer de nouvelles pages web à l'aide du
+            Ici, vous pouvez gérer les comptes administrateurs et créer de nouvelles pages web à l\'aide du
             générateur.
         </p>
         <div>
@@ -46,3 +51,6 @@
 </body>
 
 </html>
+';
+
+?>
