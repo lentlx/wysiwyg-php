@@ -15,9 +15,6 @@ echo'
 
     <title>Connexion</title>
 
-    <!--Fonts import-->
-    <link rel="stylesheet" href="https://use.typekit.net/htg5uml.css">
-
     <!--CSS import-->
     <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
