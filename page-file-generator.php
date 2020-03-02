@@ -85,7 +85,9 @@ echo'
                 <div>
                     <a href="generated-pages/'.$cleanFile.'.html">Cliquez ici pour visualiser la page</a>
                 </div>
-            <div>
+                <div>
+                    <a href="dashboard.php">Retour à l\'accueil</a>
+                </div>
         </main>
     </body>
 </html>
