@@ -65,11 +65,14 @@ fwrite($fichier,$contenu);
 fclose($fichier);
 
 // On affiche OK une fois la fonction éxécutée.
-echo'
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="'.ENCODAGE.'" />
+        <meta charset="'.ENCODAGE.'" />
+        <!--Favicon-->
+        <link rel="icon" type="img/gif" href="images/fingerprint.png">
         <title>Confirmation génération de la page</title>
         <link rel="stylesheet" type="text/css" href="style/style.css">
     </head>
@@ -91,6 +94,3 @@ echo'
         </main>
     </body>
 </html>
-';
-
-?>

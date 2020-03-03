@@ -2,7 +2,8 @@
 
 
 
-echo'
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -37,5 +38,3 @@ echo'
 </body>
 
 </html>
-';
-?>
