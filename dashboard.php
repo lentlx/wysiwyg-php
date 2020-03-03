@@ -2,7 +2,8 @@
 
 
 
-echo'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +37,7 @@ echo'
             <div class="admin-card">
                 <h2>Espace administrateur</h2>
                 <ul>
-                    <li><a href="add-admin.html">Créer un nouveau compte administrateur</a></li>
+                    <li><a href="add-admin.php">Créer un nouveau compte administrateur</a></li>
                     <li>Gérer les comptes administrateurs existants</li>
                 </ul>
             </div>
@@ -51,6 +52,3 @@ echo'
 </body>
 
 </html>
-';
-
-?>
