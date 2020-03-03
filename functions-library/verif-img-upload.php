@@ -1,46 +1,42 @@
 <?php
 
-include 'rename-photo.php';
+include "functions-library/rename-photo.php";
 
+//Variables du nouveau compte
+$civilite = $_POST['civilite'];
+$user_nom = $_POST['nom'];
+$user_prenom = $_POST['prenom'];
+$photo = $_POST['photo'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-function verifImageUpload() {
-    if(isset($_POST['photo']))
-    {
-        $file_dir = 'user-avi/';
-        $tmp_file = $_FILES['fichier']['tmp_name'];
-        $name_file = $_FILES['fichier']['name'];
+$compte_admin = ucfirst(strtolower($user_prenom))." ".strtoupper($user_nom);
 
-        echo($tmp_file);
-/*
-        if(!is_uploaded_file($tmp_file)){
-            exit("Le fichier n'a pas été uploadé.");
-        }
+if(!empty($_FILES)){
 
-        // Vérification des caractères spéciaux pour maximiser la sécurité
-        // liée à l'upload de scripts malveillants
-        if( preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $name_file))
-        {
-            exit("Nom de fichier non valide");
-        }
-        else if( !move_uploaded_file($tmp_file, $file_dir.$name_file))
-        {
-            exit("Impossible de copier le fichier dans $file_dir");
-        }
-        
-        // Vérification du type de fichier
-        $type_file = $_FILES["fichier"]["type"];
+    $file = $_FILES["photo"]["name"];
+    $tmp_file = $_FILES["photo"]["tmp_name"];
+    $type = $_FILES["photo"]["type"];
+    $size = $_FILES["photo"]["size"];
+    $error = $_FILES["photo"]["error"];
+    $file_dir = 'user-avi/';
 
-        if( pathinfo($type_file != 'jpg') && pathinfo($type_file != 'jpeg') && pathinfo($type_file != 'png') && pathinfo($type_file != 'gif') )
-        {
-            exit("Le fichier n'est pas une image");
-        }
+    //Trouver l'extension du fichier
+    $position = strrpos($file, ".") + 1;
+    $extension = substr($file, $position);
+    $extension_tab = array("jpg","jpeg","png","gif");
 
-        // Renomme le fichier selon le schéma souhaité
+    if($error != 0){
+        $probleme = "Le fichier n'a pas été téléchargé";
+    }
+
+    elseif(!in_array($extension, $extension_tab)){
+        $probleme = "L'extension du fichier n'est pas supportée !";
+    }
+
+    else{
         modifImageUploadName();
-
-        //Déplace le fichier dans son fichier de destination
-        move_uploaded_file($tmp_file, $file_dir.$name_file);
-        */
+        move_uploaded_file($tmp_file, $file_dir.$file);
     }
 }
 
