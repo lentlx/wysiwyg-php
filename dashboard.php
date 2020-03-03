@@ -14,7 +14,7 @@
     <title>Espace Client</title>
 
     <!--Favicon-->
-    <link rel="icon" type="img/gif" href="fingerprint.png">
+    <link rel="icon" type="img/gif" href="images/fingerprint.png">
 
     <!--Fonts import-->
     <link rel="stylesheet" href="https://use.typekit.net/htg5uml.css">

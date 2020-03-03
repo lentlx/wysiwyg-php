@@ -1,6 +1,6 @@
 <?php
 
-include "rename-photo.php";
+include "functions-library/rename-photo.php";
 
 $formulaire = '<form method="post" action="add-admin.php" enctype="multipart/form-data">
 <div>
@@ -47,6 +47,16 @@ if(!empty($_FILES)){
     $error = $_FILES["photo"]["error"];
     $file_dir = 'user-avi/';
 
+    //Variables du nouveau compte
+    $civilite = $_POST['civilite'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $photo = $_POST['photo'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $compte_admin = ucfirst(strtolower($prenom))." ".strtoupper($nom);
+
     //Trouver l'extension du fichier
     $position = strrpos($file, ".") + 1;
     $extension = substr($file, $position);
@@ -63,7 +73,7 @@ if(!empty($_FILES)){
     else{
         modifImageUploadName();
         move_uploaded_file($tmp_file, $file_dir.$file);
-        $confirmation = "<p>Le compte administrateur de $compte_admin a bien été créé.</p>";
+        $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
         $formulaire = "";
     }
 }
@@ -76,6 +86,9 @@ if(!empty($_FILES)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Favicon-->
+    <link rel="icon" type="img/gif" href="images/fingerprint.png">
 
     <title>Créer un nouveau compte administrateur</title>
 
@@ -93,9 +106,9 @@ if(!empty($_FILES)){
     <main>
         <div class="flex-center">
             <div class="flex-column">
-                    <?php echo($probleme); ?>
+                    <p class="avertissement"><?php echo($probleme); ?><p>
                     <?php echo($formulaire); ?>
-                    <?php echo($confirmation); ?>
+                    <p class="confirmation"><?php echo($confirmation); ?></p>
                     <a href="dashboard.php">Retour à l'accueil</a>
                 </div>
             </div>
