@@ -29,7 +29,12 @@ if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["preno
         $email = strip_tags($email);
         $password = strip_tags($password);
         $file = strip_tags($file);
-    
+
+        //Modification du format
+        $nom = ucfirst(strtolower($nom));
+        $prenom = ucfirst(strtolower($prenom));
+        $email = strtolower($email);
+
         //Trouver l'extension du fichier
         $position = strrpos($file, ".") + 1;
         $extension = substr($file, $position);
