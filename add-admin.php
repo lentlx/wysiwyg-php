@@ -1,6 +1,5 @@
 <?php
 
-include "functions-library/rename-photo.php";
 include "forms-library/add-admin-form.php";
 
 //Variables du nouveau compte
