@@ -1,81 +1,75 @@
 <?php
 
-include "functions-library/rename-photo.php";
+include "forms-library/add-admin-form.php";
 
-$formulaire = '<form method="post" action="add-admin.php" enctype="multipart/form-data">
-<div>
-    <label for="newsletter">Civilité<span class="required_el">*</span></label>
-    <span>
-        <input type="radio" name="civilite" id="1" value="homme">Madame
-    </span>
-    <span>
-        <input type="radio" name="civilite" id="2" value="femme">Monsieur
-    </span>
-</div>
-<div>
-    <label for="nom">Nom<span class="required_el">*</span></label>
-    <input type="text" name="nom" id="nom" required />
-</div>
-<div>
-    <label for="prenom">Prénom<span class="required_el">*</span></label>
-    <input type="text" name="prenom" id="prenom" required />
-</div>
-<div>
-    <label>Importer une photo de profil<span class="required_el">*</span> :</label>
-    <input type="file"name="photo" required>
-</div>
-<div>
-    <label for="mail">E-mail<span class="required_el">*</span></label>
-    <input type="email" name="email" id="email" required />
-</div>
-<div>
-    <label for="password">Mot de passe<span class="required_el">*</span></label>
-    <input type="text" name="password" id="password" required />
-</div>
-<div>
-    <input type="submit" value="Créer le compte">
-</div>
-</form>
-<div>';
+//Variables du nouveau compte
+$civilite = $_POST['civilite'];
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
+$photo = $_FILES['photo'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-if(!empty($_FILES)){
+$compte_admin = ucfirst(strtolower($prenom))." ".strtoupper($nom);
 
-    $file = $_FILES["photo"]["name"];
-    $tmp_file = $_FILES["photo"]["tmp_name"];
-    $type = $_FILES["photo"]["type"];
-    $size = $_FILES["photo"]["size"];
-    $error = $_FILES["photo"]["error"];
-    $file_dir = 'user-avi/';
+if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["prenom"]) and !empty($_POST["email"]) and !empty($_POST["password"])){
+    if(!empty($_FILES)){
 
-    //Variables du nouveau compte
-    $civilite = $_POST['civilite'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $photo = $_POST['photo'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+        $file = $_FILES["photo"]["name"];
+        $tmp_file = $_FILES["photo"]["tmp_name"];
+        $type = $_FILES["photo"]["type"];
+        $size = $_FILES["photo"]["size"];
+        $error = $_FILES["photo"]["error"];
+        $file_dir = 'user-avi/';
 
-    $compte_admin = ucfirst(strtolower($prenom))." ".strtoupper($nom);
+        //Suppression des balises html
+        $civilite = strip_tags($civilite);
+        $nom = strip_tags($nom);
+        $prenom = strip_tags($prenom);
+        $email = strip_tags($email);
+        $password = strip_tags($password);
+        $file = strip_tags($file);
 
-    //Trouver l'extension du fichier
-    $position = strrpos($file, ".") + 1;
-    $extension = substr($file, $position);
-    $extension_tab = array("jpg","jpeg","png","gif");
+        //Modification du format
+        $nom = ucfirst(strtolower($nom));
+        $prenom = ucfirst(strtolower($prenom));
+        $email = strtolower($email);
 
-    if($error != 0){
-        $probleme = "Le fichier n'a pas été téléchargé";
+        //Trouver l'extension du fichier
+        $position = strrpos($file, ".") + 1;
+        $extension = substr($file, $position);
+        $extension_tab = array("jpg","jpeg","png","gif");
+    
+        if($error != 0){
+            $probleme = "Le fichier n'a pas été téléchargé !";
+        }
+    
+        elseif(!in_array($extension, $extension_tab)){
+            $probleme = "L'extension du fichier n'est pas supportée !";
+        }
+    
+        else{
+            //Renommage de la photo de profil du nouvel admin
+            $renamed_file = "photo-".strtolower($prenom).".".$extension;
+            $file = $renamed_file;
+            move_uploaded_file($tmp_file, $file_dir.$file);
+            
+            //Ajout du nouvel admin dans le fichier csv
+            $fichier = fopen("identifiers-sheet.csv", "a");
+            $contenu = $civilite.';'.$nom.';'.$prenom.';'.$email.';'.$password.';'.$file."\n";
+            $contenu = utf8_decode($contenu);
+            fwrite($fichier, $contenu);
+            fclose($fichier);
+
+            //Masquage du formulaire et affichage d'un message de confirmation
+            $formulaire = "";
+            $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
+        }
     }
+}
 
-    elseif(!in_array($extension, $extension_tab)){
-        $probleme = "L'extension du fichier n'est pas supportée !";
-    }
-
-    else{
-        modifImageUploadName();
-        move_uploaded_file($tmp_file, $file_dir.$file);
-        $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
-        $formulaire = "";
-    }
+else{
+    $probleme_required = "Vous devez remplir tous les champs.";
 }
 
 ?>
@@ -106,6 +100,7 @@ if(!empty($_FILES)){
     <main>
         <div class="flex-center">
             <div class="flex-column">
+                    <p class="avertissement"><?php echo($probleme_required); ?></p>
                     <p class="avertissement"><?php echo($probleme); ?><p>
                     <?php echo($formulaire); ?>
                     <p class="confirmation"><?php echo($confirmation); ?></p>

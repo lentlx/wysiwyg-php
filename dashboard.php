@@ -26,11 +26,11 @@
 <body>
     <header>
         <h1>Dashboard</h1>
-        <p>Bonjour, nom_utilisateur. Bienvenue sur votre espace d\'administration.</p>
+        <p>Bonjour, nom_utilisateur. Bienvenue sur votre espace d'administration.</p>
     </header>
     <main id="dashboard">
         <p>
-            Ici, vous pouvez gérer les comptes administrateurs et créer de nouvelles pages web à l\'aide du
+            Ici, vous pouvez gérer les comptes administrateurs et créer de nouvelles pages web à l'aide du
             générateur.
         </p>
         <div>
@@ -44,7 +44,7 @@
             <div class="admin-card">
                 <h2>Création & Gestion</h2>
                 <ul>
-                    <li><a href="page-form-generator.html">Générateur de page web</a></li>
+                    <li><a href="page-generator.php">Générateur de page web</a></li>
                 </ul>
             </div>
         </div>
