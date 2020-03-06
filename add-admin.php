@@ -7,7 +7,7 @@ include "forms-library/add-admin-form.php";
 $civilite = $_POST['civilite'];
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
-$photo = $_POST['photo'];
+$photo = $_FILES['photo'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -23,7 +23,7 @@ if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["preno
         $error = $_FILES["photo"]["error"];
         $file_dir = 'user-avi/';
 
-         //Suppression des balises html
+        //Suppression des balises html
         $civilite = strip_tags($civilite);
         $nom = strip_tags($nom);
         $prenom = strip_tags($prenom);
@@ -45,10 +45,21 @@ if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["preno
         }
     
         else{
-            modifImageUploadName();
+            //Renommage de la photo de profil du nouvel admin
+            $renamed_file = "photo-".strtolower($prenom).".".$extension;
+            $file = $renamed_file;
             move_uploaded_file($tmp_file, $file_dir.$file);
-            $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
+            
+            //Ajout du nouvel admin dans le fichier csv
+            $fichier = fopen("identifiers-sheet.csv", "a");
+            $contenu = $civilite.';'.$nom.';'.$prenom.';'.$email.';'.$password.';'.$file."\n";
+            $contenu = utf8_decode($contenu);
+            fwrite($fichier, $contenu);
+            fclose($fichier);
+
+            //Masquage du formulaire et affichage d'un message de confirmation
             $formulaire = "";
+            $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
         }
     }
 }
