@@ -4,10 +4,10 @@ $formulaire = '<form method="post" action="add-admin.php" enctype="multipart/for
 <div>
     <label for="newsletter">Civilité<span class="required_el">*</span></label>
     <span>
-        <input type="radio" name="civilite" id="1" value="homme">Madame
+        <input type="radio" name="civilite" id="1" value="femme">Madame
     </span>
     <span>
-        <input type="radio" name="civilite" id="2" value="femme">Monsieur
+        <input type="radio" name="civilite" id="2" value="homme">Monsieur
     </span>
 </div>
 <div>
