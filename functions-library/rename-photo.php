@@ -2,8 +2,8 @@
 
 function modifImageUploadName(){
     $file = $_FILES["photo"]["name"];
-    $renamed_file = "photo-".strtolower($user_nom);
-    $file = $renamed_photo;
+    $renamed_file = "photo-".strtolower($nom);
+    $file = $renamed_file;
 }
 
 ?>
