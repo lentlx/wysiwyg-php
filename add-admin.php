@@ -17,6 +17,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 $compte_admin = ucfirst(strtolower($prenom))." ".strtoupper($nom);
+$user_name = ucfirst(strtolower($prenom)).strtoupper($nom);
 
 if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["prenom"]) and !empty($_POST["email"]) and !empty($_POST["password"]) and !empty($_FILES)){
     $file = $_FILES["photo"]["name"];
