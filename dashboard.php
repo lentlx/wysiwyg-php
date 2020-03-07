@@ -1,6 +1,15 @@
 <?php
+session_start();
 
+if(!isset($_SESSION["user"])){
+    header("location:sign-in.php");
+    exit;
+}
 
+if(isset($_POST["logout"])){
+    session_unset();
+    header("location:sign-in.php");
+}
 
 ?>
 
@@ -26,7 +35,12 @@
 <body>
     <header>
         <h1>Dashboard</h1>
-        <p>Bonjour, nom_utilisateur. Bienvenue sur votre espace d'administration.</p>
+        <p>Bonjour, <?php echo($_SESSION["user"]); ?>. Bienvenue sur votre espace d'administration.</p>
+        <form method="post" action="dashboard.php">
+            <div>
+                <input type="submit" name="logout" value="Se déconnecter">
+            </div>
+        </form>
     </header>
     <main id="dashboard">
         <p>

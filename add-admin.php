@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION["user"])){
+    header("location:sign-in.php");
+    exit;
+}
 
 include "forms-library/add-admin-form.php";
 
@@ -25,7 +31,7 @@ if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["preno
     $nom = strip_tags($nom);
     $prenom = strip_tags($prenom);
     $email = strip_tags($email);
-    $password = strip_tags($password);
+    $password = htmlentities($password);
     $file = strip_tags($file);
 
     //Modification du format
