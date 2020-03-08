@@ -43,6 +43,18 @@ div{
     justify-content: center;
 }
 
+#admin-list>div{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2em;
+    justify-content: center;
+}
+
+#admin-list .home{
+  display: flex;
+  justify-content: center;
+}
+
 main>div ul{
     list-style: none;
 }
@@ -53,10 +65,14 @@ main>div li{
 
 /* Style des cartes de l'espace admin */
 .admin-card{
-    height: 400px;
+    min-height: 400px;
     width: 400px;
     border: 2px var(--main-color) solid;
     margin: 50px 50px
+}
+
+.admin-card img{
+    max-width: 400px;
 }
 
 .admin-card h2{

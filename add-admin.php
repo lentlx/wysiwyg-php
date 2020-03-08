@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION["user"])){
-    header("location:sign-in.php");
+    header("location:login.php");
     exit;
 }
 
@@ -40,39 +40,46 @@ if(!empty($_POST["civilite"]) and !empty($_POST["nom"]) and !empty($_POST["preno
     $prenom = ucfirst(strtolower($prenom));
     $email = strtolower($email);
 
-    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-        $erreur = "L'adresse mail n'est pas correcte.";
+    if(strlen($password) < 4){
+        $password_error = '<p class="avertissement">Le mot de passe doit être composé de plus de 4 caractères !</p>';
     }
-
-    //Trouver l'extension du fichier
-    $position = strrpos($file, ".") + 1;
-    $extension = substr($file, $position);
-    $extension_tab = array("jpg","jpeg","png","gif");
-
-    if($error != 0){
-        $probleme = "Le fichier n'a pas été téléchargé !";
-    }
-
-    elseif(!in_array($extension, $extension_tab)){
-        $probleme = "L'extension du fichier n'est pas supportée !";
-    }
-
     else{
-        //Renommage de la photo de profil du nouvel admin
-        $renamed_file = "photo-".strtolower($prenom).".".$extension;
-        $file = $renamed_file;
-        move_uploaded_file($tmp_file, $file_dir.$file);
-        
-        //Ajout du nouvel admin dans le fichier csv
-        $fichier = fopen("identifiers-sheet.csv", "a");
-        $contenu = $civilite.';'.$nom.';'.$prenom.';'.$email.';'.$password.';'.$file."\n";
-        $contenu = utf8_decode($contenu);
-        fwrite($fichier, $contenu);
-        fclose($fichier);
-
-        //Masquage du formulaire et affichage d'un message de confirmation
-        $formulaire = "";
-        $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+            $erreur = "L'adresse mail n'est pas correcte.";
+        }
+    
+        else{
+            //Trouver l'extension du fichier
+            $position = strrpos($file, ".") + 1;
+            $extension = substr($file, $position);
+            $extension_tab = array("jpg","jpeg","png","gif");
+    
+            if($error != 0){
+                $probleme = "Le fichier n'a pas été téléchargé !";
+            }
+    
+            elseif(!in_array($extension, $extension_tab)){
+                $probleme = "L'extension du fichier n'est pas supportée !";
+            }
+    
+            else{
+                //Renommage de la photo de profil du nouvel admin
+                $renamed_file = "photo-".strtolower($prenom).".".$extension;
+                $file = $renamed_file;
+                move_uploaded_file($tmp_file, $file_dir.$file);
+                
+                //Ajout du nouvel admin dans le fichier csv
+                $fichier = fopen("identifiers-sheet.csv", "a");
+                $contenu = $civilite.','.$nom.','.$prenom.','.$email.','.$password.','.$file."\n";
+                $contenu = utf8_decode($contenu);
+                fwrite($fichier, $contenu);
+                fclose($fichier);
+    
+                //Masquage du formulaire et affichage d'un message de confirmation
+                $formulaire = "";
+                $confirmation = "Le compte administrateur de $compte_admin a bien été créé.";
+            }
+        }
     }
 }
 
@@ -109,6 +116,7 @@ else{
         <div class="flex-center">
             <div class="flex-column">
                     <p class="avertissement"><?php echo($erreur); ?></p>
+                    <?php echo($password_error) ?>
                     <p class="avertissement"><?php echo($probleme_required); ?></p>
                     <p class="avertissement"><?php echo($probleme); ?><p>
                     <?php echo($formulaire); ?>
