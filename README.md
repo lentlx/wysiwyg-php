@@ -1,6 +1,8 @@
 # DM PHP - WYSIWYG
 
-Cliquer [ici](http://lthieuleux.eemi.tech/PHP/DM/login.php) pour visualiser le projet
+Cliquer [ici](http://lthieuleux.eemi.tech/PHP/DM/login.php) pour visualiser le projet.
+
+
 Création d'un espace d'administration permettant de générer automatiquement des fichiers HTML à partir d'un formulaire.
 
 ## Auteurs
