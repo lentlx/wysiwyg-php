@@ -10,16 +10,22 @@ if(!empty($_POST["email"]) and !empty($_POST["password"])){
     $email = strip_tags($email);
     $password = htmlentities($password);
 
-    //Set session
-    $_SESSION["email"] = $email;
-    $_SESSION["password"] = $password;
-    $_SESSION["user"] = $email;
+    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+        $erreur = '<p class="avertissement">L\'adresse mail n\'est pas correcte.</p>';
+    }
 
-    //Redirection
-    header("location:dashboard.php");
+    else{
+        //Set session
+        $_SESSION["email"] = $email;
+        $_SESSION["password"] = $password;
+        $_SESSION["user"] = $email;
+
+        //Redirection
+        header("location:dashboard.php");
+    }
 }
 else{
-    $probleme_required = "Vous devez remplir tous les champs.";
+    $probleme_required = '<p class="avertissement">Vous devez remplir tous les champs.</p>';
 }
 ?>
 
@@ -41,8 +47,9 @@ else{
 
 <body class="one-screen">
         <h1>Connexion</h1>
-        <p class="avertissement"><?php echo($probleme_required); ?></p>
-        <form method="post" action="sign-in.php">
+        <?php echo($erreur); ?>
+        <?php echo($probleme_required); ?>
+        <form method="post" action="login.php">
             <div>
                 <label for="mail">E-mail</label>
                 <input type="email" name="email" required id="email" placeholder="" value="<?php $email ?>" />

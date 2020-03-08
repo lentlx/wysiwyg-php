@@ -2,13 +2,13 @@
 session_start();
 
 if(!isset($_SESSION["user"])){
-    header("location:sign-in.php");
+    header("location:login.php");
     exit;
 }
 
 if(isset($_POST["logout"])){
     session_unset();
-    header("location:sign-in.php");
+    header("location:login.php");
 }
 
 ?>
@@ -52,7 +52,7 @@ if(isset($_POST["logout"])){
                 <h2>Espace administrateur</h2>
                 <ul>
                     <li><a href="add-admin.php">Créer un nouveau compte administrateur</a></li>
-                    <li>Gérer les comptes administrateurs existants</li>
+                    <li><a href="admin-list.php">Gérer les comptes administrateurs existants</a></li>
                 </ul>
             </div>
             <div class="admin-card">
