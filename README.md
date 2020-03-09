@@ -12,5 +12,6 @@ Création d'un espace d'administration permettant de générer automatiquement d
 
 ## La suite du projet
 
-* Quelques fonctionnalités ne sont toujours pas implémentées (ex: verification des mots de passes à la connnexion)
-* Je continuerai sûrement ce projet sur mon temps libre pour l'améliorer
+* Quelques fonctionnalités ne sont toujours pas implémentées (ex: verification des mots de passes à la connnexion).
+* Adapter la plateforme pour les devices mobiles.
+* Je continuerai sûrement ce projet sur mon temps libre pour l'améliorer.
